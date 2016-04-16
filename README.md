@@ -10,12 +10,12 @@
 
 2. Start Nimbus
 
-        $ docker run -d --name nimbus --net container:zookeeper 31z4/storm:latest nimbus
+        $ docker run -d --name nimbus --net container:zookeeper 31z4/storm:1.0.0 nimbus
 
 3. Start Supervisor
 
-        $ docker run -d --name supervisor --net container:nimbus 31z4/storm:latest supervisor
+        $ docker run -d --name supervisor --net container:nimbus 31z4/storm::1.0.0 supervisor
 
 ## Running Topologies
 
-    $ docker run -it --net container:nimbus -v $(pwd)/storm-starter-topologies-0.10.0.jar:/topology.jar storm jar /topology.jar storm.starter.WordCountTopology topology
+    $ docker run -it --net container:nimbus -v $(pwd)/storm-starter-topologies-1.0.0.jar:/topology.jar storm jar /topology.jar storm.starter.WordCountTopology topology
