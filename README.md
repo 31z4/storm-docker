@@ -6,15 +6,15 @@
 
 1. Start Zookeeper
 
-    $ docker run -d --name zookeeper mesoscloud/zookeeper
+        $ docker run -d --name zookeeper jplock/zookeeper:3.4.8
 
 2. Start Nimbus
 
-    $ docker run -d --name nimbus --net container:zookeeper storm nimbus
+        $ docker run -d --name nimbus --net container:zookeeper 31z4/storm:latest nimbus
 
 3. Start Supervisor
 
-    $ docker run -d --name supervisor --net container:nimbus storm supervisor
+        $ docker run -d --name supervisor --net container:nimbus 31z4/storm:latest supervisor
 
 ## Running Topologies
 

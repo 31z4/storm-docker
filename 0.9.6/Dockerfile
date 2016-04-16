@@ -7,7 +7,7 @@ RUN apk add --no-cache \
     python=2.7.11-r3
 
 # Download and install Apache Storm
-RUN wget -q -O - http://apache-mirror.rbc.ru/pub/apache/storm/apache-storm-0.10.0/apache-storm-0.10.0.tar.gz | tar xzf -
+RUN wget -q -O - http://www-eu.apache.org/dist/storm/apache-storm-0.9.6/apache-storm-0.9.6.tar.gz | tar xzf -
 
-WORKDIR apache-storm-0.10.0
+WORKDIR apache-storm-0.9.6
 ENTRYPOINT ["bin/storm"]
