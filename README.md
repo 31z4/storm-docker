@@ -28,11 +28,11 @@
 
 3. Start Supervisor
 
-        $ docker run -d --name supervisor --net container:nimbus 31z4/storm::1.0.0 supervisor
+        $ docker run -d --name supervisor --net container:nimbus 31z4/storm:1.0.0 supervisor
 
 ## Running Topologies
 
-    $ docker run -it --net container:nimbus -v $(pwd)/storm-starter-topologies-1.0.0.jar:/topology.jar storm jar /topology.jar storm.starter.WordCountTopology topology
+    $ docker run -it --net container:nimbus -v $(pwd)/storm-starter-topologies-1.0.0.jar:/topology.jar storm:1.0.0 jar /topology.jar org.apache.storm.starter.WordCountTopology topology
 
 # License
 
