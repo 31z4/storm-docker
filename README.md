@@ -42,6 +42,36 @@ Assuming you have `storm-starter-topologies-1.0.0.jar` in the current directory.
 
 		$ docker run -it --net container:nimbus -v $(pwd)/storm-starter-topologies-1.0.0.jar:/topology.jar 31z4/storm:1.0.0 jar /topology.jar org.apache.storm.starter.WordCountTopology topology
 
+## ... via [`docker-compose`](https://github.com/docker/compose)
+
+Example `docker-compose.yml` for `storm`:
+
+```yaml
+version: '2'
+services:
+    zookeeper:
+        image: jplock/zookeeper:3.4.8
+        restart: always
+
+    nimbus:
+        image: 31z4/storm:1.0.0
+        command: nimbus -c storm.zookeeper.servers="[\"zookeeper\"]" -c nimbus.host="nimbus"
+        depends_on:
+            - zookeeper
+        restart: always
+        ports:
+            - 6627:6627
+
+    supervisor:
+        image: 31z4/storm:1.0.0
+        command: supervisor -c storm.zookeeper.servers="[\"zookeeper\"]" -c nimbus.host="nimbus"
+        depends_on:
+            - nimbus
+        restart: always
+```
+
+Run `docker-compose up` and wait for it to initialize completely. The Nimbus will be available at your host and port `6627`.
+
 ## Configuration
 
 This image uses [default configuration](https://github.com/apache/storm/blob/v1.0.0/conf/defaults.yaml) of the Apache Storm. There are two main ways to change it.
