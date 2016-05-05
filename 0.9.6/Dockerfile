@@ -17,8 +17,9 @@ RUN set -x \
     && mkdir -p "$STORM_LOCAL_DIR" "$STORM_LOG_DIR" \
     && chown -R "$STORM_USER:$STORM_USER" "$STORM_LOCAL_DIR" "$STORM_LOG_DIR"
 
-ENV GPG_KEY 8DE03962E80B8FFD
+ENV GPG_KEY ACEFE18DD2322E1E84587A148DE03962E80B8FFD
 ENV DISTRO_NAME apache-storm-0.9.6
+ENV PATH $PATH:/$DISTRO_NAME/bin
 
 # Download Apache Storm, verify its PGP signature, untar and clean up
 RUN set -x \
@@ -28,12 +29,10 @@ RUN set -x \
     && wget -q "http://www.us.apache.org/dist/storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz.asc" \
     && export GNUPGHOME="$(mktemp -d)" \
     && gpg --keyserver ha.pool.sks-keyservers.net --recv-key "$GPG_KEY" \
-    && gpg --verify "$DISTRO_NAME.tar.gz.asc" "$DISTRO_NAME.tar.gz" \
+    && gpg --batch --verify "$DISTRO_NAME.tar.gz.asc" "$DISTRO_NAME.tar.gz" \
     && tar -xzf "$DISTRO_NAME.tar.gz" \
     && chown -R "$STORM_USER:$STORM_USER" "$DISTRO_NAME" \
     && rm -r "$GNUPGHOME" "$DISTRO_NAME.tar.gz" "$DISTRO_NAME.tar.gz.asc" \
     && apk del .build-deps
 
 USER storm
-WORKDIR $DISTRO_NAME
-ENTRYPOINT ["bin/storm"]
