@@ -22,7 +22,7 @@ This image entry point is a [Storm command line client](http://storm.apache.org/
 
 Assuming you have `storm-starter-topologies-1.0.1.jar` in the current directory.
 
-	$ docker run -it -v $(pwd)/storm-starter-topologies-1.0.1.jar:/topology.jar 31z4/storm:1.0.1 jar /topology.jar org.apache.storm.starter.ExclamationTopology
+	$ docker run -it -v $(pwd)/storm-starter-topologies-1.0.1.jar:/topology.jar 31z4/storm:1.0.1 storm jar /topology.jar org.apache.storm.starter.ExclamationTopology
 
 ## Setting up a minimal Storm cluster
 
