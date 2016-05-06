@@ -35,4 +35,5 @@ RUN set -x \
     && rm -r "$GNUPGHOME" "$DISTRO_NAME.tar.gz" "$DISTRO_NAME.tar.gz.asc" \
     && apk del .build-deps
 
+WORKDIR $DISTRO_NAME
 USER storm
