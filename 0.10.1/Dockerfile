@@ -7,13 +7,12 @@ RUN apk add --no-cache \
     python
 
 ENV STORM_USER storm
-ENV STORM_USER_DIR /home/storm
 ENV STORM_LOCAL_DIR /data
 ENV STORM_LOG_DIR /logs
 
-# Add user and make dirs
+# Add a user and make dirs
 RUN set -x \
-    && adduser -D "$STORM_USER" -h "$STORM_USER_DIR"\
+    && adduser -D "$STORM_USER" \
     && mkdir -p "$STORM_LOCAL_DIR" "$STORM_LOG_DIR" \
     && chown -R "$STORM_USER:$STORM_USER" "$STORM_LOCAL_DIR" "$STORM_LOG_DIR"
 
@@ -36,4 +35,4 @@ RUN set -x \
     && apk del .build-deps
 
 WORKDIR $DISTRO_NAME
-USER storm
+USER $STORM_USER
