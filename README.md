@@ -28,7 +28,7 @@ Assuming you have `storm-starter-topologies-1.0.1.jar` in the current directory.
 
 1.	[Apache Zookeeper](https://zookeeper.apache.org/) is a must for running a Storm cluster. Start it first. Since the Zookeeper "fails fast" it's better to always restart it.
 
-		$ docker run -d --restart always --name zookeeper jplock/zookeeper:3.4.8
+		$ docker run -d --restart always --name zookeeper 31z4/zookeeper:3.4.8
 
 2.	The Nimbus daemon has to be connected with the Zookeeper. It's also a "fail fast" system.
 
@@ -50,7 +50,7 @@ Example `docker-compose.yml` for `storm`:
 version: '2'
 services:
     zookeeper:
-        image: jplock/zookeeper:3.4.8
+        image: 31z4/zookeeper:3.4.8
         restart: always
 
     nimbus:
