@@ -16,8 +16,6 @@ Apache Storm is a distributed computation framework written predominantly in the
 
 # How to use this image
 
-This image entry point is a [Storm command line client](http://storm.apache.org/releases/1.0.0/Command-line-client.html). See couple of usage examples below.
-
 ## Running topologies in local mode
 
 Assuming you have `storm-starter-topologies-1.0.1.jar` in the current directory.

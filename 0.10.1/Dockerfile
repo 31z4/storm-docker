@@ -6,9 +6,9 @@ RUN apk add --no-cache \
     bash \
     python
 
-ENV STORM_USER storm
-ENV STORM_LOCAL_DIR /data
-ENV STORM_LOG_DIR /logs
+ARG STORM_USER=storm
+ARG STORM_LOCAL_DIR=/data
+ARG STORM_LOG_DIR=/logs
 
 # Add a user and make dirs
 RUN set -x \
@@ -16,9 +16,8 @@ RUN set -x \
     && mkdir -p "$STORM_LOCAL_DIR" "$STORM_LOG_DIR" \
     && chown -R "$STORM_USER:$STORM_USER" "$STORM_LOCAL_DIR" "$STORM_LOG_DIR"
 
-ENV GPG_KEY ACEFE18DD2322E1E84587A148DE03962E80B8FFD
-ENV DISTRO_NAME apache-storm-0.10.1
-ENV PATH $PATH:/$DISTRO_NAME/bin
+ARG GPG_KEY=ACEFE18DD2322E1E84587A148DE03962E80B8FFD
+ARG DISTRO_NAME=apache-storm-0.10.1
 
 # Download Apache Storm, verify its PGP signature, untar and clean up
 RUN set -x \
@@ -36,3 +35,5 @@ RUN set -x \
 
 WORKDIR $DISTRO_NAME
 USER $STORM_USER
+
+ENV PATH $PATH:/$DISTRO_NAME/bin
