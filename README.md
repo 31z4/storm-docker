@@ -51,12 +51,16 @@ version: '2'
 services:
     zookeeper:
         image: 31z4/zookeeper:3.4.8
+        container_name: zookeeper
         restart: always
 
     nimbus:
         image: 31z4/storm:1.0.2
+        container_name: nimbus
         command: storm nimbus -c storm.zookeeper.servers="[\"zookeeper\"]" -c nimbus.host="nimbus"
         depends_on:
+            - zookeeper
+        links:
             - zookeeper
         restart: always
         ports:
@@ -64,9 +68,14 @@ services:
 
     supervisor:
         image: 31z4/storm:1.0.2
+        container_name: supervisor
         command: storm supervisor -c storm.zookeeper.servers="[\"zookeeper\"]" -c nimbus.host="nimbus"
         depends_on:
             - nimbus
+            - zookeeper
+        links:
+            - nimbus
+            - zookeeper
         restart: always
 ```
 
