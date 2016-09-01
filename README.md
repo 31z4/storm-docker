@@ -6,7 +6,7 @@ This image is proposed to [Docker official images](https://hub.docker.com/explor
 * `0.10.1` [(0.10.1/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/0.10.1/Dockerfile)
 * `1.0.2`, `latest` [(1.0.2/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.0.2/Dockerfile)
 
-[![](https://badge.imagelayers.io/31z4/storm:latest.svg)](https://imagelayers.io/?images=31z4%2Fstorm:0.9.6,31z4%2Fstorm:0.10.1,31z4%2Fstorm:1.0.2)
+[![](https://images.microbadger.com/badges/image/31z4/storm.svg)](http://microbadger.com/images/31z4/storm)
 
 # What is Apache Storm?
 
