@@ -2,9 +2,9 @@ This image is proposed to [Docker official images](https://hub.docker.com/explor
 
 # Supported tags and respective `Dockerfile` links
 
-* `0.9.6` [(0.9.6/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/0.9.6/Dockerfile)
-* `0.10.1` [(0.10.1/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/0.10.1/Dockerfile)
-* `1.0.2`, `latest` [(1.0.2/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.0.2/Dockerfile)
+* `0.9.7`, `0.9` [(0.9.7/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/0.9.7/Dockerfile)
+* `0.10.1`, `0.10` [(0.10.1/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/0.10.1/Dockerfile)
+* `1.0.2`, `1.0`, `latest` [(1.0.2/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.0.2/Dockerfile)
 
 [![](https://images.microbadger.com/badges/image/31z4/storm.svg)](http://microbadger.com/images/31z4/storm)
 

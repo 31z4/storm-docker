@@ -17,7 +17,7 @@ RUN set -x \
     && chown -R "$STORM_USER:$STORM_USER" "$STORM_LOCAL_DIR" "$STORM_LOG_DIR"
 
 ARG GPG_KEY=ACEFE18DD2322E1E84587A148DE03962E80B8FFD
-ARG DISTRO_NAME=apache-storm-0.9.6
+ARG DISTRO_NAME=apache-storm-0.9.7
 
 # Download Apache Storm, verify its PGP signature, untar and clean up
 RUN set -x \
