@@ -17,14 +17,14 @@ RUN set -x \
     && chown -R "$STORM_USER:$STORM_USER" "$STORM_LOCAL_DIR" "$STORM_LOG_DIR"
 
 ARG GPG_KEY=ACEFE18DD2322E1E84587A148DE03962E80B8FFD
-ARG DISTRO_NAME=apache-storm-0.10.1
+ARG DISTRO_NAME=apache-storm-0.10.2
 
 # Download Apache Storm, verify its PGP signature, untar and clean up
 RUN set -x \
     && apk add --no-cache --virtual .build-deps \
         gnupg \
-    && wget -q "http://www-eu.apache.org/dist/storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz" \
-    && wget -q "http://www.us.apache.org/dist/storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz.asc" \
+    && wget -q "http://www.apache.org/dist/storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz" \
+    && wget -q "http://www.apache.org/dist/storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz.asc" \
     && export GNUPGHOME="$(mktemp -d)" \
     && gpg --keyserver ha.pool.sks-keyservers.net --recv-key "$GPG_KEY" \
     && gpg --batch --verify "$DISTRO_NAME.tar.gz.asc" "$DISTRO_NAME.tar.gz" \

@@ -3,7 +3,7 @@ This image is proposed to [Docker official images](https://hub.docker.com/explor
 # Supported tags and respective `Dockerfile` links
 
 * `0.9.7`, `0.9` [(0.9.7/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/0.9.7/Dockerfile)
-* `0.10.1`, `0.10` [(0.10.1/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/0.10.1/Dockerfile)
+* `0.10.2`, `0.10` [(0.10.2/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/0.10.2/Dockerfile)
 * `1.0.2`, `1.0`, `latest` [(1.0.2/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.0.2/Dockerfile)
 
 [![](https://images.microbadger.com/badges/image/31z4/storm.svg)](http://microbadger.com/images/31z4/storm)
@@ -28,7 +28,7 @@ Assuming you have `storm-starter-topologies-1.0.2.jar` in the current directory.
 
 1.	[Apache Zookeeper](https://zookeeper.apache.org/) is a must for running a Storm cluster. Start it first. Since the Zookeeper "fails fast" it's better to always restart it.
 
-		$ docker run -d --restart always --name zookeeper 31z4/zookeeper:3.4.8
+		$ docker run -d --restart always --name zookeeper zookeeper:3.4
 
 2.	The Nimbus daemon has to be connected with the Zookeeper. It's also a "fail fast" system.
 
@@ -50,7 +50,7 @@ Example `docker-compose.yml` for `storm`:
 version: '2'
 services:
     zookeeper:
-        image: 31z4/zookeeper:3.4.8
+        image: zookeeper:3.4
         container_name: zookeeper
         restart: always
 
