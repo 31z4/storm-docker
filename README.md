@@ -91,7 +91,7 @@ This image uses [default configuration](https://github.com/apache/storm/blob/v1.
 
 2.	Assuming you have `storm.yaml` in the current directory you can mount it as a volume.
 
-		$ docker run -it -v $(pwd)/storm.yaml:/apache-storm-1.0.2/conf/storm.yaml 31z4/storm:1.0.2 storm nimbus
+		$ docker run -it -v $(pwd)/storm.yaml:/conf/storm.yaml 31z4/storm:1.0.2 storm nimbus
 
 ## Data persistence
 

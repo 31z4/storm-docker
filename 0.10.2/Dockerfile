@@ -4,17 +4,19 @@ MAINTAINER Elisey Zanko <elisey.zanko@gmail.com>
 # Install required packages
 RUN apk add --no-cache \
     bash \
-    python
+    python \
+    su-exec
 
-ARG STORM_USER=storm
-ARG STORM_LOCAL_DIR=/data
-ARG STORM_LOG_DIR=/logs
+ENV STORM_USER=storm
+ENV STORM_CONF_DIR=/conf
+ENV STORM_DATA_DIR=/data
+ENV STORM_LOG_DIR=/logs
 
 # Add a user and make dirs
 RUN set -x \
     && adduser -D "$STORM_USER" \
-    && mkdir -p "$STORM_LOCAL_DIR" "$STORM_LOG_DIR" \
-    && chown -R "$STORM_USER:$STORM_USER" "$STORM_LOCAL_DIR" "$STORM_LOG_DIR"
+    && mkdir -p "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR" \
+    && chown -R "$STORM_USER:$STORM_USER" "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR"
 
 ARG GPG_KEY=ACEFE18DD2322E1E84587A148DE03962E80B8FFD
 ARG DISTRO_NAME=apache-storm-0.10.2
@@ -34,6 +36,8 @@ RUN set -x \
     && apk del .build-deps
 
 WORKDIR $DISTRO_NAME
-USER $STORM_USER
 
 ENV PATH $PATH:/$DISTRO_NAME/bin
+
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
