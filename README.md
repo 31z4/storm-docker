@@ -28,19 +28,19 @@ Assuming you have `storm-starter-topologies-1.0.2.jar` in the current directory.
 
 1.	[Apache Zookeeper](https://zookeeper.apache.org/) is a must for running a Storm cluster. Start it first. Since the Zookeeper "fails fast" it's better to always restart it.
 
-		$ docker run -d --restart always --name zookeeper zookeeper:3.4
+		$ docker run -d --restart always --name some-zookeeper zookeeper:3.4
 
 2.	The Nimbus daemon has to be connected with the Zookeeper. It's also a "fail fast" system.
 
-		$ docker run -d --restart always --name nimbus --net container:zookeeper 31z4/storm:1.0.2 storm nimbus
+		$ docker run -d --restart always --name some-nimbus --link some-zookeeper:zookeeper 31z4/storm:1.0.2 storm nimbus
 
 3.	Finally start a single Supervisor node. It will talk to the Nimbus and Zookeeper.
 
-		$ docker run -d --restart always --name supervisor --net container:nimbus --net container:zookeeper 31z4/storm:1.0.2 storm supervisor
+		$ docker run -d --restart always --name supervisor --link some-zookeeper:zookeeper --link some-nimbus:nimbus 31z4/storm:1.0.2 storm supervisor
 
 4.	Now we can submit a topology to our cluster.
 
-		$ docker run -it --net container:nimbus -v $(pwd)/storm-starter-topologies-1.0.2.jar:/topology.jar 31z4/storm:1.0.2 storm jar /topology.jar org.apache.storm.starter.WordCountTopology topology
+		$ docker run --link some-nimbus:nimbus -it --rm -v $(pwd)/storm-starter-topologies-1.0.2.jar:/topology.jar 31z4/storm:1.0.2 storm jar /topology.jar org.apache.storm.starter.WordCountTopology topology
 
 ## ... via [`docker-compose`](https://github.com/docker/compose)
 
@@ -57,7 +57,7 @@ services:
     nimbus:
         image: 31z4/storm:1.0.2
         container_name: nimbus
-        command: storm nimbus -c storm.zookeeper.servers="[\"zookeeper\"]" -c nimbus.host="nimbus"
+        command: storm nimbus
         depends_on:
             - zookeeper
         links:
@@ -69,7 +69,7 @@ services:
     supervisor:
         image: 31z4/storm:1.0.2
         container_name: supervisor
-        command: storm supervisor -c storm.zookeeper.servers="[\"zookeeper\"]" -c nimbus.host="nimbus"
+        command: storm supervisor
         depends_on:
             - nimbus
             - zookeeper
