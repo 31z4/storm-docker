@@ -1,5 +1,3 @@
-This image is proposed to [Docker official images](https://hub.docker.com/explore/). Please send [this PR](https://github.com/docker-library/official-images/pull/1641) some love to make this happen!
-
 # Supported tags and respective `Dockerfile` links
 
 * `0.9.7`, `0.9` [(0.9.7/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/0.9.7/Dockerfile)
