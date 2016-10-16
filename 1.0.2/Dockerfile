@@ -7,10 +7,10 @@ RUN apk add --no-cache \
     python \
     su-exec
 
-ENV STORM_USER=storm
-ENV STORM_CONF_DIR=/conf
-ENV STORM_DATA_DIR=/data
-ENV STORM_LOG_DIR=/logs
+ENV STORM_USER=storm \
+    STORM_CONF_DIR=/conf \
+    STORM_DATA_DIR=/data \
+    STORM_LOG_DIR=/logs
 
 # Add a user and make dirs
 RUN set -x \
