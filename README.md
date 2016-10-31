@@ -59,7 +59,10 @@ services:
     nimbus:
         image: 31z4/storm:1.0.2
         container_name: nimbus
-        command: storm nimbus
+        command: >
+            storm nimbus
+            -c storm.zookeeper.servers="[\"zookeeper\"]"
+            -c storm.local.hostname=nimbus
         depends_on:
             - zookeeper
         links:
@@ -71,7 +74,11 @@ services:
     supervisor:
         image: 31z4/storm:1.0.2
         container_name: supervisor
-        command: storm supervisor
+        command: >
+            storm supervisor
+            -c storm.zookeeper.servers="[\"zookeeper\"]"
+            -c storm.local.hostname=supervisor
+            -c nimbus.seeds="[\"nimbus\"]"
         depends_on:
             - nimbus
             - zookeeper
@@ -79,6 +86,23 @@ services:
             - nimbus
             - zookeeper
         restart: always
+
+    ui:
+        image: 31z4/storm:1.0.2
+        container_name: ui
+        command: >
+            storm ui
+            -c storm.zookeeper.servers="[\"zookeeper\"]"
+            -c nimbus.seeds="[\"nimbus\"]"
+        depends_on:
+            - nimbus
+            - zookeeper
+        links:
+            - nimbus
+            - zookeeper
+        restart: always
+        ports:
+            - 8080:8080
 ```
 
 Run `docker-compose up` and wait for it to initialize completely. The Nimbus will be available at your host and port `6627`.
