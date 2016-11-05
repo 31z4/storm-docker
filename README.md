@@ -59,7 +59,9 @@ services:
     nimbus:
         image: 31z4/storm:1.0.2
         container_name: nimbus
-        command: storm nimbus
+        command: >
+            storm nimbus
+            -c storm.local.hostname=nimbus
         depends_on:
             - zookeeper
         links:
