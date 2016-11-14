@@ -93,7 +93,9 @@ services:
             - 8080:8080
 ```
 
-Run `docker-compose up` and wait for it to initialize completely. The Nimbus will be available at your host and port `6627`.
+Run `docker-compose up` and wait for it to initialize completely. The Nimbus will be available at your host and port `6627` and the UI available at port `8080` through your browser.
+
+Note: the supervisor logs will not currently work correctly in the UI.
 
 ## Configuration
 
