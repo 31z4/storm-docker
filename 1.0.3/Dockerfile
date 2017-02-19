@@ -1,5 +1,4 @@
 FROM openjdk:8-jre-alpine
-MAINTAINER Elisey Zanko <elisey.zanko@gmail.com>
 
 # Install required packages
 RUN apk add --no-cache \
@@ -19,7 +18,7 @@ RUN set -x \
     && chown -R "$STORM_USER:$STORM_USER" "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR"
 
 ARG GPG_KEY=ACEFE18DD2322E1E84587A148DE03962E80B8FFD
-ARG DISTRO_NAME=apache-storm-1.0.2
+ARG DISTRO_NAME=apache-storm-1.0.3
 
 # Download Apache Storm, verify its PGP signature, untar and clean up
 RUN set -x \
