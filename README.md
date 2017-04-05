@@ -80,9 +80,23 @@ services:
             - nimbus
             - zookeeper
         restart: always
+
+    ui:
+        image: 31z4/storm:1.0.2
+        container_name: ui
+        command: storm ui
+        depends_on:
+            - nimbus
+        links:
+            - nimbus
+        restart: always
+        ports:
+            - 8080:8080
 ```
 
-Run `docker-compose up` and wait for it to initialize completely. The Nimbus will be available at your host and port `6627`.
+Run `docker-compose up` and wait for it to initialize completely. The Nimbus will be available at your host and port `6627` and the UI available at port `8080` through your browser.
+
+Note: Logs not currently work correctly in the UI.
 
 ## Configuration
 
