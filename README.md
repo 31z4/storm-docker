@@ -2,7 +2,7 @@
 
 * `1.0.6`, `1.0` [(1.0.6/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.0.6/Dockerfile)
 * `1.1.2`, `1.1`, [(1.1.2/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.1.2/Dockerfile)
-* `1.2.0`, `1.2`, `latest` [(1.2.0/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.2.0/Dockerfile)
+* `1.2.1`, `1.2`, `latest` [(1.2.0/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.2.1/Dockerfile)
 
 [![](https://images.microbadger.com/badges/image/31z4/storm.svg)](http://microbadger.com/images/31z4/storm)
 
