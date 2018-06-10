@@ -1,8 +1,8 @@
 # Supported tags and respective `Dockerfile` links
 
 * `1.0.6`, `1.0` [(1.0.6/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.0.6/Dockerfile)
-* `1.1.2`, `1.1`, [(1.1.2/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.1.2/Dockerfile)
-* `1.2.1`, `1.2`, `latest` [(1.2.0/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.2.1/Dockerfile)
+* `1.1.3`, `1.1`, [(1.1.3/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.1.3/Dockerfile)
+* `1.2.2`, `1.2`, `latest` [(1.2.2/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.2.2/Dockerfile)
 
 [![](https://images.microbadger.com/badges/image/31z4/storm.svg)](http://microbadger.com/images/31z4/storm)
 
