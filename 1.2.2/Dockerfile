@@ -41,4 +41,6 @@ WORKDIR $DISTRO_NAME
 ENV PATH $PATH:/$DISTRO_NAME/bin
 
 COPY docker-entrypoint.sh /
+HEALTHCHECK --interval=40s --timeout=20s \
+  CMD storm node-health-check
 ENTRYPOINT ["/docker-entrypoint.sh"]
