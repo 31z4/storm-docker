@@ -1,10 +1,8 @@
 # Supported tags and respective `Dockerfile` links
 
-* `1.0.6`, `1.0` [(1.0.6/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.0.6/Dockerfile)
 * `1.1.3`, `1.1`, [(1.1.3/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.1.3/Dockerfile)
-* `1.2.2`, `1.2`, `latest` [(1.2.2/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.2.2/Dockerfile)
-
-[![](https://images.microbadger.com/badges/image/31z4/storm.svg)](http://microbadger.com/images/31z4/storm)
+* `1.2.2`, `1.2`, [(1.2.2/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.2.2/Dockerfile)
+* `2.0.0`, `2.0`, `latest` [(2.0.0/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/2.0.0/Dockerfile)
 
 # What is Apache Storm?
 
@@ -86,7 +84,7 @@ Run `docker stack deploy -c stack.yml storm` (or `docker-compose -f stack.yml up
 
 ## Configuration
 
-This image uses [default configuration](https://github.com/apache/storm/blob/v1.1.1/conf/defaults.yaml) of the Apache Storm. There are two main ways to change it.
+This image uses [default configuration](https://github.com/apache/storm/blob/v2.0.0/conf/defaults.yaml) of the Apache Storm. There are two main ways to change it.
 
 1.	Using command line arguments.
 
@@ -98,7 +96,7 @@ This image uses [default configuration](https://github.com/apache/storm/blob/v1.
 
 ## Logging
 
-This image uses [default logging configuration](https://github.com/apache/storm/tree/v1.1.1/log4j2). All logs go to the `/logs` directory by default.
+This image uses [default logging configuration](https://github.com/apache/storm/tree/v2.0.0/log4j2). All logs go to the `/logs` directory by default.
 
 ## Data persistence
 

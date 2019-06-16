@@ -1,29 +1,37 @@
-FROM openjdk:8-jre-alpine
+FROM openjdk:8-jre-slim
 
-# Install required packages
-RUN apk add --no-cache \
-    bash \
-    python \
-    su-exec
-
-ENV STORM_USER=storm \
-    STORM_CONF_DIR=/conf \
+ENV STORM_CONF_DIR=/conf \
     STORM_DATA_DIR=/data \
     STORM_LOG_DIR=/logs
 
-# Add a user and make dirs
-RUN set -ex; \
-    adduser -D "$STORM_USER"; \
+# Add a user with an explicit UID/GID and create necessary directories
+RUN set -eux; \
+    groupadd -r storm --gid=1000; \
+    useradd -r -g storm --uid=1000 storm; \
     mkdir -p "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR"; \
-    chown -R "$STORM_USER:$STORM_USER" "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR"``
+    chown -R storm:storm "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR"``
+
+# Install required packges
+RUN set -eux; \
+    apt-get update; \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y --no-install-recommends \
+        bash \
+        ca-certificates \
+        dirmngr \
+        gosu \
+        gnupg \
+        python \
+        wget; \
+    rm -rf /var/lib/apt/lists/*; \
+# Verify that gosu binary works
+    gosu nobody true
 
 ARG GPG_KEY=ACEFE18DD2322E1E84587A148DE03962E80B8FFD
 ARG DISTRO_NAME=apache-storm-1.2.2
 
 # Download Apache Storm, verify its PGP signature, untar and clean up
-RUN set -ex; \
-    apk add --no-cache --virtual .build-deps \
-      gnupg; \
+RUN set -eux; \
     wget -q "http://www.apache.org/dist/storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz"; \
     wget -q "http://www.apache.org/dist/storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz.asc"; \
     export GNUPGHOME="$(mktemp -d)"; \
@@ -32,9 +40,8 @@ RUN set -ex; \
     gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY"; \
     gpg --batch --verify "$DISTRO_NAME.tar.gz.asc" "$DISTRO_NAME.tar.gz"; \
     tar -xzf "$DISTRO_NAME.tar.gz"; \
-    chown -R "$STORM_USER:$STORM_USER" "$DISTRO_NAME"; \
     rm -rf "$GNUPGHOME" "$DISTRO_NAME.tar.gz" "$DISTRO_NAME.tar.gz.asc"; \
-    apk del .build-deps
+    chown -R storm:storm "$DISTRO_NAME"
 
 WORKDIR $DISTRO_NAME
 
