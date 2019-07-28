@@ -1,7 +1,7 @@
 # Supported tags and respective `Dockerfile` links
 
 * `1.1.3`, `1.1`, [(1.1.3/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.1.3/Dockerfile)
-* `1.2.2`, `1.2`, [(1.2.2/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.2.2/Dockerfile)
+* `1.2.3`, `1.2`, [(1.2.3/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/1.2.3/Dockerfile)
 * `2.0.0`, `2.0`, `latest` [(2.0.0/Dockerfile)](https://github.com/31z4/storm-docker/blob/master/2.0.0/Dockerfile)
 
 # What is Apache Storm?
