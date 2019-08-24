@@ -33,8 +33,8 @@ ARG DISTRO_NAME=apache-storm-1.1.3
 
 # Download Apache Storm, verify its PGP signature, untar and clean up
 RUN set -eux; \
-    wget -q "http://www.apache.org/dist/storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz"; \
-    wget -q "http://www.apache.org/dist/storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz.asc"; \
+    wget -q "https://archive.apache.org/dist/storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz"; \
+    wget -q "https://archive.apache.org/dist/storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz.asc"; \
     export GNUPGHOME="$(mktemp -d)"; \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-key "$GPG_KEY" || \
     gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" || \
