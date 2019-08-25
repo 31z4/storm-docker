@@ -22,6 +22,7 @@ RUN set -eux; \
         gosu \
         gnupg \
         python \
+        procps \
         wget; \
     rm -rf /var/lib/apt/lists/*; \
 # Verify that gosu binary works
