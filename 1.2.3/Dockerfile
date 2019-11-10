@@ -11,7 +11,7 @@ RUN set -eux; \
     mkdir -p "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR"; \
     chown -R storm:storm "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR"``
 
-# Install required packges
+# Install required packages
 RUN set -eux; \
     apt-get update; \
     DEBIAN_FRONTEND=noninteractive \

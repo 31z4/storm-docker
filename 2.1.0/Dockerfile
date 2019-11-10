@@ -11,7 +11,7 @@ RUN set -eux; \
     mkdir -p "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR"; \
     chown -R storm:storm "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR"``
 
-# Install required packges
+# Install required packages
 RUN set -eux; \
     apt-get update; \
     DEBIAN_FRONTEND=noninteractive \
@@ -28,8 +28,8 @@ RUN set -eux; \
 # Verify that gosu binary works
     gosu nobody true
 
-ARG GPG_KEY=ACEFE18DD2322E1E84587A148DE03962E80B8FFD
-ARG DISTRO_NAME=apache-storm-2.0.0
+ARG GPG_KEY=5167DE337E7370373499FC1DA4A672F11B5050C8
+ARG DISTRO_NAME=apache-storm-2.1.0
 
 # Download Apache Storm, verify its PGP signature, untar and clean up
 RUN set -eux; \
