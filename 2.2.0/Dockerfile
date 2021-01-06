@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-slim
+FROM openjdk:11-jre-slim
 
 ENV STORM_CONF_DIR=/conf \
     STORM_DATA_DIR=/data \
