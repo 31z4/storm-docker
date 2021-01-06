@@ -66,5 +66,5 @@ WORKDIR $DISTRO_NAME
 
 ENV PATH $PATH:/$DISTRO_NAME/bin
 
-COPY docker-entrypoint.sh /
+COPY 2.2.0/docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
