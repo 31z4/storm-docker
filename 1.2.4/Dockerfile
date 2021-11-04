@@ -28,8 +28,8 @@ RUN set -eux; \
 # Verify that gosu binary works
     gosu nobody true
 
-ARG GPG_KEY=ACEFE18DD2322E1E84587A148DE03962E80B8FFD
-ARG DISTRO_NAME=apache-storm-1.1.3
+ARG GPG_KEY=5167DE337E7370373499FC1DA4A672F11B5050C8
+ARG DISTRO_NAME=apache-storm-1.2.4
 
 # Download Apache Storm, verify its PGP signature, untar and clean up
 RUN set -eux; \
@@ -54,6 +54,7 @@ RUN set -eux; \
     ddist "$DISTRO_NAME.tar.gz" "storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz"; \
     ddist "$DISTRO_NAME.tar.gz.asc" "storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz.asc"; \
     export GNUPGHOME="$(mktemp -d)"; \
+    gpg --keyserver keyserver.ubuntu.com --recv-key "$GPG_KEY" || \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-key "$GPG_KEY" || \
     gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" || \
     gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY"; \
