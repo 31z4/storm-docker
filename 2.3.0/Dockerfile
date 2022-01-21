@@ -23,10 +23,19 @@ RUN set -eux; \
         gnupg \
         python \
         procps \
+        netcat \
+        curl \
+        openssh-server \
+        jq \
         wget; \
     rm -rf /var/lib/apt/lists/*; \
 # Verify that gosu binary works
     gosu nobody true
+
+# Install BOSH Cli
+RUN bosh_ver=$(curl -s https://api.github.com/repos/cloudfoundry/bosh-cli/releases/latest | jq -r '.tag_name' | tr -d "v" ) && \
+       wget https://github.com/cloudfoundry/bosh-cli/releases/download/v${bosh_ver}/bosh-cli-${bosh_ver}-linux-amd64 \
+       -O /usr/local/bin/bosh && chmod a+x /usr/local/bin/bosh
 
 ARG GPG_KEY=5167DE337E7370373499FC1DA4A672F11B5050C8
 ARG DISTRO_NAME=apache-storm-2.3.0
@@ -65,7 +74,7 @@ RUN set -eux; \
 
 WORKDIR $DISTRO_NAME
 
-ENV PATH $PATH:/$DISTRO_NAME/bin
+ENV PATH $PATH:/$DISTRO_NAME/bin:/usr/local/bin
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
