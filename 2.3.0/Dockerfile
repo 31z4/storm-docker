@@ -54,10 +54,9 @@ RUN set -eux; \
     ddist "$DISTRO_NAME.tar.gz" "storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz"; \
     ddist "$DISTRO_NAME.tar.gz.asc" "storm/$DISTRO_NAME/$DISTRO_NAME.tar.gz.asc"; \
     export GNUPGHOME="$(mktemp -d)"; \
-    gpg --keyserver keyserver.ubuntu.com --recv-key "$GPG_KEY" || \
-    gpg --keyserver ha.pool.sks-keyservers.net --recv-key "$GPG_KEY" || \
-    gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" || \
-    gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY"; \
+    gpg --keyserver hkps://keyserver.pgp.com --recv-key "$GPG_KEY" || \
+    gpg --keyserver hkps://keyserver.ubuntu.com --recv-keys "$GPG_KEY" || \
+    gpg --keyserver hkps://pgp.mit.edu --recv-keys "$GPG_KEY"; \
     gpg --batch --verify "$DISTRO_NAME.tar.gz.asc" "$DISTRO_NAME.tar.gz"; \
     tar -xzf "$DISTRO_NAME.tar.gz"; \
     rm -rf "$GNUPGHOME" "$DISTRO_NAME.tar.gz" "$DISTRO_NAME.tar.gz.asc"; \
