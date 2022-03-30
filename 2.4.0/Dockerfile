@@ -28,8 +28,8 @@ RUN set -eux; \
 # Verify that gosu binary works
     gosu nobody true
 
-ARG GPG_KEY=5167DE337E7370373499FC1DA4A672F11B5050C8
-ARG DISTRO_NAME=apache-storm-2.3.0
+ARG GPG_KEY=51379DA8A7AE5B02674EF15C134716AF768D9B6E
+ARG DISTRO_NAME=apache-storm-2.4.0
 
 # Download Apache Storm, verify its PGP signature, untar and clean up
 RUN set -eux; \
