@@ -8,6 +8,15 @@ if [ "$1" = 'storm' -a "$(id -u)" = '0' ]; then
     exec gosu storm "$0" "$@"
 fi
 
+# Generate JMX server config
+JMX_CONFIG="$JMX_DIR/config.yaml"
+if [ ! -f "$JMX_CONFIG" ]; then
+  cat << EOF >> "$JMX_CONFIG"
+rules:
+- pattern: ".*"
+EOF
+fi
+
 # Generate the config only if it doesn't exist
 CONFIG="$STORM_CONF_DIR/storm.yaml"
 if [ ! -f "$CONFIG" ]; then

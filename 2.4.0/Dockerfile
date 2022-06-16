@@ -2,14 +2,16 @@ FROM openjdk:11-jre-slim
 
 ENV STORM_CONF_DIR=/conf \
     STORM_DATA_DIR=/data \
-    STORM_LOG_DIR=/logs
+    STORM_LOG_DIR=/logs  \
+    JMX_DIR=/jmx         \
+    JMX_AGENT_URL=https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.17.0/jmx_prometheus_javaagent-0.17.0.jar
 
 # Add a user with an explicit UID/GID and create necessary directories
 RUN set -eux; \
     groupadd -r storm --gid=1000; \
     useradd -r -g storm --uid=1000 storm; \
-    mkdir -p "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR"; \
-    chown -R storm:storm "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR"``
+    mkdir -p "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR" "$JMX_DIR"; \
+    chown -R storm:storm "$STORM_CONF_DIR" "$STORM_DATA_DIR" "$STORM_LOG_DIR" "$JMX_DIR"``
 
 # Install required packages
 RUN set -eux; \
@@ -61,6 +63,8 @@ RUN set -eux; \
     tar -xzf "$DISTRO_NAME.tar.gz"; \
     rm -rf "$GNUPGHOME" "$DISTRO_NAME.tar.gz" "$DISTRO_NAME.tar.gz.asc"; \
     chown -R storm:storm "$DISTRO_NAME"
+
+RUN wget -O "$JMX_DIR/agent.jar" $JMX_AGENT_URL
 
 WORKDIR $DISTRO_NAME
 
