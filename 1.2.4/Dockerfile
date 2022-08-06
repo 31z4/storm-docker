@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-slim
+FROM eclipse-temurin:8-jre
 
 ENV STORM_CONF_DIR=/conf \
     STORM_DATA_DIR=/data \
@@ -21,12 +21,14 @@ RUN set -eux; \
         dirmngr \
         gosu \
         gnupg \
-        python \
+        python2 \
         procps \
         wget; \
     rm -rf /var/lib/apt/lists/*; \
 # Verify that gosu binary works
-    gosu nobody true
+    gosu nobody true; \
+# Set default version to Python 2
+    update-alternatives --install /usr/bin/python python /usr/bin/python2 0
 
 ARG GPG_KEY=5167DE337E7370373499FC1DA4A672F11B5050C8
 ARG DISTRO_NAME=apache-storm-1.2.4

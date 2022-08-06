@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim
+FROM eclipse-temurin:11-jre
 
 ENV STORM_CONF_DIR=/conf \
     STORM_DATA_DIR=/data \
@@ -21,12 +21,14 @@ RUN set -eux; \
         dirmngr \
         gosu \
         gnupg \
-        python \
+        python2 \
         procps \
         wget; \
     rm -rf /var/lib/apt/lists/*; \
 # Verify that gosu binary works
-    gosu nobody true
+    gosu nobody true; \
+# Set default version to Python 2
+    update-alternatives --install /usr/bin/python python /usr/bin/python2 0
 
 ARG GPG_KEY=51379DA8A7AE5B02674EF15C134716AF768D9B6E
 ARG DISTRO_NAME=apache-storm-2.4.0
