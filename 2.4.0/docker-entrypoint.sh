@@ -16,6 +16,10 @@ storm.zookeeper.servers: [zookeeper]
 nimbus.seeds: [nimbus]
 storm.log.dir: "$STORM_LOG_DIR"
 storm.local.dir: "$STORM_DATA_DIR"
+# This is a workaround to make storm workers run in jdk-11 and above.
+# It should be removed once the fix is included into the storm distribution.
+# See more details at https://github.com/apache/storm/pull/3503 and https://github.com/31z4/storm-docker/issues/39
+worker.childopts: "-Xmx%HEAP-MEM%m -XX:+IgnoreUnrecognizedVMOptions -XX:+PrintGCDetails -Xloggc:artifacts/gc.log -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=10 -XX:GCLogFileSize=1M -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=artifacts/heapdump"
 EOF
 fi
 
