@@ -66,6 +66,29 @@ RUN set -eux; \
 
 WORKDIR $DISTRO_NAME
 
+# This is a workaround to make storm workers run in jdk-11 and above.
+# Thanks to Raul Negrean (raulnegrean) for the suggestion.
+# It should be removed once the fix is included into the storm distribution.
+# See more details at https://github.com/apache/storm/pull/3503 and https://github.com/31z4/storm-docker/issues/39
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+        zip \
+        unzip; \
+    for jar in \
+        lib/storm-client-2.4.0.jar \
+        lib-worker/storm-client-2.4.0.jar \
+    ; do \
+        unzip "$jar" defaults.yaml; \
+        sed -i 's/worker.childopts: "/&-XX:+IgnoreUnrecognizedVMOptions /' defaults.yaml; \
+        zip -u "$jar" defaults.yaml; \
+        rm defaults.yaml; \
+    done; \
+    apt-get purge -y --auto-remove \
+        zip \
+        unzip; \
+    rm -rf /var/lib/apt/lists/*
+
 ENV PATH $PATH:/$DISTRO_NAME/bin
 
 COPY docker-entrypoint.sh /
