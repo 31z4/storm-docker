@@ -1,3 +1,5 @@
+**The Apache Storm project took over maintenance on the image. See [https://github.com/apache/storm-docker](https://github.com/apache/storm-docker).**
+
 # Docker image packaging for Apache Storm
 
 This is the Git repo of the [Docker "Official Image"](https://github.com/docker-library/official-images#what-are-official-images) for [`storm`](https://hub.docker.com/_/storm/). See [the Docker Hub page](https://hub.docker.com/_/storm/) for the full readme on how to use this Docker image and for information regarding contributing and issues.
